@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esemény létrehozása | Kolozsvári Keresztény Sportklub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-blue-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-running text-2xl"></i>
+                    <h1 class="text-2xl font-bold">Kolozsvári Keresztény Sportklub</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html" class="hover:text-blue-200">Kezdőlap</a></li>
+                        <li><a href="events.html" class="hover:text-blue-200">Események</a></li>
+                        <li><a href="create-event.html" class="hover:text-blue-200 font-bold">Esemény létrehozása</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-bold mb-6">Új esemény létrehozása</h2>
+        <form id="create-event-form" class="bg-white rounded-lg shadow-md p-6">
+            <div class="mb-4">
+                <label for="event-name" class="block text-gray-700 font-semibold mb-2">Esemény neve</label>
+                <input type="text" id="event-name" class="w-full border border-gray-300 rounded px-4 py-2" required>
+            </div>
+            <div class="mb-4">
+                <label for="event-date" class="block text-gray-700 font-semibold mb-2">Dátum</label>
+                <input type="date" id="event-date" class="w-full border border-gray-300 rounded px-4 py-2" required>
+            </div>
+            <div class="mb-4">
+                <label for="event-location" class="block text-gray-700 font-semibold mb-2">Helyszín</label>
+                <input type="text" id="event-location" class="w-full border border-gray-300 rounded px-4 py-2" required>
+            </div>
+            <div class="mb-4">
+                <label for="event-description" class="block text-gray-700 font-semibold mb-2">Leírás</label>
+                <textarea id="event-description" class="w-full border border-gray-300 rounded px-4 py-2" rows="4" required></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="event-category" class="block text-gray-700 font-semibold mb-2">Kategória</label>
+                <select id="event-category" class="w-full border border-gray-300 rounded px-4 py-2">
+                    <option value="hiking">Túrázás</option>
+                    <option value="biking">Kerékpározás</option>
+                    <option value="karting">Karting</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="route-file" class="block text-gray-700 font-semibold mb-2">Útvonal fájl (GPX/KML)</label>
+                <input type="file" id="route-file" accept=".gpx,.kml" class="w-full border border-gray-300 rounded px-4 py-2">
+            </div>
+            <div class="mb-4">
+                <label for="private-event" class="flex items-center">
+                    <input type="checkbox" id="private-event" class="mr-2">
+                    <span class="text-gray-700">Privát esemény (meghívóval)</span>
+                </label>
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Esemény létrehozása</button>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>&copy; 2025 Kolozsvári Keresztény Sportklub</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-blue-300"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-blue-300"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-blue-300"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/create-event.js"></script>
+</body>
+</html>
