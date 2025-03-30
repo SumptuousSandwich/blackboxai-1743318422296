@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esemény részletei | Kolozsvári Keresztény Sportklub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-blue-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-running text-2xl"></i>
+                    <h1 class="text-2xl font-bold">Kolozsvári Keresztény Sportklub</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html" class="hover:text-blue-200">Kezdőlap</a></li>
+                        <li><a href="events.html" class="hover:text-blue-200">Események</a></li>
+                        <li><a href="create-event.html" class="hover:text-blue-200">Esemény létrehozása</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Event Details -->
+            <div>
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-2xl font-bold" id="event-title">Esemény címe</h2>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm" id="event-category">Kategória</span>
+                    </div>
+                    
+                    <div class="flex items-center text-gray-600 mb-4">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        <span id="event-date">Dátum</span>
+                    </div>
+                    
+                    <div class="flex items-center text-gray-600 mb-4">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        <span id="event-location">Helyszín</span>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-2">Leírás</h3>
+                        <p class="text-gray-700" id="event-description">Esemény leírása...</p>
+                    </div>
+                    
+                    <!-- Route Map -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-2">Útvonal</h3>
+                        <div id="map"></div>
+                    </div>
+                    
+                    <!-- Calendar Integration -->
+                    <div class="mb-6">
+                        <button id="download-ics" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            <i class="far fa-calendar-plus mr-2"></i>Naptárba mentés
+                        </button>
+                    </div>
+                    
+                    <!-- Invite Link -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-2">Meghívó link</h3>
+                        <div class="flex">
+                            <input type="text" id="invite-link" class="flex-grow border border-gray-300 rounded-l px-4 py-2" readonly>
+                            <button id="copy-link" class="bg-blue-600 text-white px-4 py-2 rounded-r hover:bg-blue-700">
+                                <i class="far fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4">Hozzászólások</h3>
+                    <div id="comments-container" class="mb-6 space-y-4">
+                        <!-- Comments will be loaded here -->
+                    </div>
+                    <div>
+                        <textarea id="comment-input" class="w-full border border-gray-300 rounded px-4 py-2 mb-2" placeholder="Írd meg hozzászólásod..."></textarea>
+                        <button id="submit-comment" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Küldés</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Participation Section -->
+            <div>
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+                    <h3 class="text-xl font-semibold mb-4">Résztvevők</h3>
+                    
+                    <!-- Participation Form -->
+                    <div class="mb-6">
+                        <div id="join-form">
+                            <input type="text" id="participant-name" class="w-full border border-gray-300 rounded px-4 py-2 mb-2" placeholder="Neved">
+                            <button id="join-button" class="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                                <i class="fas fa-user-plus mr-2"></i>Csatlakozás
+                            </button>
+                        </div>
+                        <div id="leave-section" class="hidden">
+                            <p class="mb-2">Ön már részt vesz ezen az eseményen.</p>
+                            <button id="leave-button" class="w-full bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+                                <i class="fas fa-user-minus mr-2"></i>Lemondás
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Participants List -->
+                    <div>
+                        <h4 class="font-medium mb-2">Résztvevők listája (<span id="participant-count">0</span>)</h4>
+                        <ul id="participants-list" class="space-y-2">
+                            <!-- Participants will be loaded here -->
+                            <li class="text-gray-500">Még nincsenek résztvevők</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>&copy; 2025 Kolozsvári Keresztény Sportklub</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-blue-300"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-blue-300"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-blue-300"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/event.js"></script>
+</body>
+</html>
