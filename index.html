@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolozsvári Keresztény Sportklub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-blue-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-running text-2xl"></i>
+                    <h1 class="text-2xl font-bold">Kolozsvári Keresztény Sportklub</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html" class="hover:text-blue-200">Kezdőlap</a></li>
+                        <li><a href="events.html" class="hover:text-blue-200">Események</a></li>
+                        <li><a href="create-event.html" class="hover:text-blue-200">Esemény létrehozása</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-blue-700 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">Csatlakozz sportoló közösségünkhöz!</h2>
+            <p class="text-xl mb-8">Fedezd fel a legjobb túrákat, kerékpáros utakat és sporteseményeket Kolozsváron</p>
+            <a href="events.html" class="bg-white text-blue-800 px-6 py-3 rounded-lg font-bold hover:bg-blue-100 transition">Események megtekintése</a>
+        </div>
+    </section>
+
+    <!-- Featured Events -->
+    <section class="py-16 container mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-8 text-center">Közelgő események</h2>
+        <div class="grid md:grid-cols-3 gap-8" id="featured-events">
+            <!-- Events will be loaded dynamically -->
+            <div class="text-center py-8">
+                <p class="text-gray-500">Nincsenek közelgő események</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>&copy; 2025 Kolozsvári Keresztény Sportklub</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-blue-300"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-blue-300"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-blue-300"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
